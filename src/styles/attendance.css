@@ -1,0 +1,8 @@
+.attendance-title {
+  font-size: 10px;
+}
+
+.attendance-title-container {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,113 @@
+.search-button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+.search-button:hover {
+  background-color: transparent;
+}
+
+.search-button:active {
+  background-color: transparent;
+}
+
+.search-button:focus {
+  background-color: transparent;
+}
+
+.search-field {
+  font-family: "Roboto";
+  color: #323130;
+  font-size: 14px;
+  line-height: 18px;
+  background-color: #ffffff;
+  border: #5e5c5a 1px solid;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.search-content {
+  display: flex;
+}
+
+.search-controls {
+  display: flex;
+  margin-top: 20px;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  /* margin-left: 371px; */
+  margin-left: auto;
+  margin-right: 30px;
+  /* justify-self: flex-end; */
+  /* justify-self: end; */
+  /* flex-direction: row; */
+}
+
+.search-title {
+  margin-top: 32px;
+  margin-left: 48px;
+  margin-bottom: 14px;
+  width: 499px;
+  height: 36px;
+  font-family: "Roboto";
+  color: #5d5d5b;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.search-result-label {
+  margin-top: 16px;
+  margin-left: 0;
+  margin-bottom: 0;
+  font-family: "Roboto";
+  color: #080a0b;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.search-results-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  margin-left: 59px;
+  margin-right: 48px;
+  /* min-width: 100%; */
+  border-bottom: #f0f0f0 1px solid;
+  /* display: inline-block; */
+  /* display: block; */
+}
+
+.search-results {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 62px;
+  grid-column: 1;
+  /* flex-flow: row nowrap; */
+  /* flex: 1; */
+  /* box-sizing:; */
+  /* max-width: 50%; */
+  /* max-width: fit-content; */
+  /* width: 100%; */
+  /* display: block; */
+}
+
+.search-result {
+  margin-right: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 300px; */
+}
+
+.search-result-label-p {
+  margin: 0px;
+}
+
+.search-result-profpic {
+  object-fit: cover;
+}

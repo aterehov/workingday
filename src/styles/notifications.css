@@ -1,0 +1,174 @@
+.notif-main-header {
+  font-family: "Roboto", sans-serif;
+  font-size: 48px;
+  color: #030303;
+  line-height: 48px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.notifications-area {
+  background-color: #f0f0f0;
+  padding: 30px;
+  font-weight: 600;
+}
+
+.notif-sub-header {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #030303;
+  line-height: 32px;
+  width: 550px;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.by-date-dropdown-toggle {
+  width: 120px;
+  height: 36px;
+  color: #323130;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 17px;
+  border: #5e5c5a 1px solid;
+  border-radius: 2px;
+  /* fill: #fff; */
+}
+
+.notif-sender {
+  width: 488px;
+  height: 24px;
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.notif-on-doc {
+  width: 488px;
+  height: 24px;
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.notif-text {
+  width: 488px;
+  /* height: 24px; */
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.notif-datetime {
+  width: 98px;
+  height: 24px;
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.notif-section-title {
+  margin-bottom: 10px;
+}
+
+.notification {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #dedede;
+}
+
+.no-padding {
+  /* padding: 0px; */
+}
+
+.notif-img-col {
+  padding-right: 0px;
+  max-width: fit-content;
+}
+
+.notif-info-col {
+  padding-left: 14px;
+  padding-right: 0px;
+}
+
+.notif-sender {
+  margin: 0;
+}
+
+.notif-on-doc {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.notif-text {
+  margin: 0;
+}
+
+.notif-datetime-col {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 20px;
+}
+
+.notif-datetime {
+  text-align: right;
+}
+
+.read-square {
+  height: 12px;
+  width: 12px;
+  background-color: #4792a7;
+  border-radius: 2px;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+.notif-sender-profpic {
+  object-fit: cover;
+}
+
+.filter-area {
+  padding: 30px;
+  background-color: #f0f0f0;
+  margin-left: 30px;
+  width: 300px;
+}
+
+.filter-header {
+  width: 240px;
+  height: 32px;
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.notif-datetime-inner-col {
+  margin-right: 0;
+  padding-right: 0;
+  max-width: fit-content;
+}
+
+.by-date-dropdown-toggle::after {
+  display: none;
+}
+
+.notif-filter-check {
+  /* flex-direction: row-reverse; */
+}
