@@ -111,16 +111,19 @@ function UserPage({ get_id = useParams }) {
                 <h2 className="no-margin font-props-inherit">Стажер</h2>
                 <h2 className="no-margin font-props-inherit">Проктолог</h2>
               </div> */}
-              <TitleField title="Email" value={optional(info.email)} />
               <TitleField
-                title="Phone Number"
+                title="Электронная почтв"
+                value={optional(info.email)}
+              />
+              <TitleField
+                title="Номер телефона"
                 value={optional(info.phones, info.phones[0])}
               />
               <Row>
                 <Col className="user-page-col-padding">
                   {/* <TitleField title="Department" value="Engineering" /> */}
                   <TitleField
-                    title="Birthday"
+                    title="День рождения"
                     value={optional(info.birthday)}
                   />
                 </Col>
@@ -135,7 +138,7 @@ function UserPage({ get_id = useParams }) {
               <Row>
                 <Col className="user-page-col-padding">
                   {/* <TitleField title="Country" value="United States" /> */}
-                  <TitleField title="Team" value={optional(info.team)} />
+                  <TitleField title="Команда" value={optional(info.team)} />
                 </Col>
                 <Col className="user-page-col-padding">
                   {/* <TitleField title="Preferred Language" value="English" /> */}

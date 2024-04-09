@@ -237,7 +237,7 @@ function UserEditPage({ get_id = useParams }) {
               <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="birthday">
-                    Birthday
+                    День рождения
                   </label>
                   <br />
                   <input
@@ -253,7 +253,7 @@ function UserEditPage({ get_id = useParams }) {
               <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="email">
-                    Email
+                    Электронная почта
                   </label>
                   <br />
                   <input
@@ -269,7 +269,7 @@ function UserEditPage({ get_id = useParams }) {
               <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="phone">
-                    Phone Number
+                    Номер телефона
                   </label>
                   <br />
                   <input
@@ -392,7 +392,7 @@ function UserEditPage({ get_id = useParams }) {
                     className="edit-save-button"
                     onClick={onClick}
                   >
-                    Save Changes
+                    Сохранить изменения
                   </button>
                 </Col>
               </Row>

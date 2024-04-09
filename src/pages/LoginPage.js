@@ -43,10 +43,10 @@ function LoginPage() {
         <Card.Body>
           <Form>
             <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Логин</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Введите email"
+                // type="email"
+                placeholder="Введите логин"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
