@@ -12,17 +12,23 @@ import Notification from "../components/Notification";
 import notifFilter from "../functions/notifFilter";
 import arrayInsDel from "../functions/arrayInsDel";
 import notifSort from "../functions/notifSort";
+import Document from "../components/Document";
+import "../styles/viewdocuments.css";
 
-function Notifications() {
+function ViewDocuments() {
   const [data, setData] = useState(null);
   const [info, setInfo] = useState(null);
   useAsync(getJsonWithErrorHandlerFunc, setInfo, [
     (args) => API.infoEmployee(args),
     [getCachedLogin()],
   ]);
+  // useAsync(getJsonWithErrorHandlerFunc, setData, [
+  //   (args) => API.notifications(args),
+  //   [{}],
+  // ]);
   useAsync(getJsonWithErrorHandlerFunc, setData, [
-    (args) => API.notifications(args),
-    [{}],
+    (args) => API.listDocuments(args),
+    [],
   ]);
   // let show_types = [
   //   "vacation_request",
@@ -30,40 +36,40 @@ function Notifications() {
   //   "vacation_denied",
   //   "attendance_added",
   // ];
-  const [showTypes, setShowTypes] = useState([
-    "vacation_request",
-    "vacation_approved",
-    "vacation_denied",
-    "attendance_added",
-  ]);
+  // const [showTypes, setShowTypes] = useState([
+  //   "vacation_request",
+  //   "vacation_approved",
+  //   "vacation_denied",
+  //   "attendance_added",
+  // ]);
 
-  function changeShowState(type) {
-    setShowTypes([...arrayInsDel(showTypes, type)]);
-  }
+  // function changeShowState(type) {
+  //   setShowTypes([...arrayInsDel(showTypes, type)]);
+  // }
 
   // console.log("NOTIFICATIONS DATA");
   // console.log(data);
 
-  const [processed, setProcessed] = useState(null);
-  useEffect(() => {
-    if (!data) {
-      return;
-    }
-    setProcessed(notifSort(notifFilter(data.notifications, showTypes)));
-  }, [data, showTypes]);
+  // const [processed, setProcessed] = useState(null);
+  // useEffect(() => {
+  //   if (!data) {
+  //     return;
+  //   }
+  //   setProcessed(notifSort(notifFilter(data.notifications, showTypes)));
+  // }, [data, showTypes]);
 
-  return !processed || !info ? null : (
+  return !data || !info ? null : (
     <div style={{ display: "flex" }}>
-      <LeftPanel highlight="notifications" />
+      <LeftPanel highlight="viewdoc" />
       <div>
         <TopPanel
-          title="Уведомления"
+          title="Мои документы"
           profpic={info.photo_link}
           showfunctions={false}
           username={info.name}
         />
         <div className="main-content">
-          {/* <h1 className="notif-main-header">Notifications</h1> */}
+          {/* <h1 className="notif-main-header">Documents</h1> */}
           <Container>
             <Row>
               <div
@@ -87,10 +93,16 @@ function Notifications() {
                 </Container> */}
                 {/* </div> */}
                 {/* {data.notifications.map((notif) => Notification(notif))} */}
-                {processed.map((notif) => Notification(notif))}
+                {/* {processed.map((notif) => Notification(notif))} */}
+                {/* {Document({
+                  name: "An interesting document",
+                  description:
+                    "This document might be very interesting to you.",
+                })} */}
+                {data.documents.map((doc) => Document(doc))}
               </div>
 
-              <div className="filter-area">
+              {/* <div className="filter-area">
                 <h2 className="filter-header">Filter</h2>
                 <Form>
                   <Container>
@@ -129,17 +141,17 @@ function Notifications() {
                     </Row>
                   </Container>
                 </Form>
-                {/* <button
+                <button
                   onClick={() => {
                     setShowTypes([]);
                   }}
                 >
                   Clear All
-                </button> */}
-                {/* <button onClick={() => console.log(showTypes)}>
+                </button>
+                <button onClick={() => console.log(showTypes)}>
                   Show show_types
-                </button> */}
-              </div>
+                </button>
+              </div> */}
             </Row>
           </Container>
         </div>
@@ -148,4 +160,4 @@ function Notifications() {
   );
 }
 
-export default Notifications;
+export default ViewDocuments;

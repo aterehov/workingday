@@ -74,6 +74,20 @@ function LeftPanel({ highlight }) {
         />
         <p className="left-panel-label">Уведомления</p>
       </Link>
+
+      <Link className="left-panel-link" to="/documents">
+        <IconRender
+          className="left-panel-icon"
+          path="/images/icons/document.svg"
+          width="18px"
+          height="24px"
+          iwidth="18px"
+          iheight="18px"
+          addstyle={highlight == "viewdoc" ? highlight_style : {}}
+          // addstyle={{ display: "flex", alignItems: "center" }}
+        />
+        <p className="left-panel-label">Мои документы</p>
+      </Link>
       {optional(
         getCachedRole() == "manager",
         <Link className="left-panel-link" to="/attendance">
@@ -91,14 +105,47 @@ function LeftPanel({ highlight }) {
       )}
 
       {optional(
-        getCachedRole() == "manager",
+        getCachedRole() == "admin",
         <Link className="left-panel-link" to="/attendance/view">
           <IconRender
             className="left-panel-icon"
-            path="/images/icons/calendar-day.svg"
+            path="/images/icons/table.svg"
             addstyle={highlight == "viewattendance" ? highlight_style : {}}
           />
           <p className="left-panel-label">Рабочее время</p>
+        </Link>
+      )}
+
+      {optional(
+        getCachedRole() == "admin",
+        <Link className="left-panel-link" to="/documents/send">
+          <IconRender
+            className="left-panel-icon"
+            path="/images/icons/send.svg"
+            addstyle={highlight == "senddoc" ? highlight_style : {}}
+          />
+          <p className="left-panel-label">Отправить документ</p>
+        </Link>
+      )}
+
+      <Link className="left-panel-link" to="/calendar">
+        <IconRender
+          className="left-panel-icon"
+          path="/images/icons/calendar-day.svg"
+          addstyle={highlight == "calendar" ? highlight_style : {}}
+        />
+        <p className="left-panel-label">Календарь</p>
+      </Link>
+
+      {optional(
+        getCachedRole() == "admin",
+        <Link className="left-panel-link" to="/documents/report">
+          <IconRender
+            className="left-panel-icon"
+            path="/images/icons/resume.svg"
+            addstyle={highlight == "docreport" ? highlight_style : {}}
+          />
+          <p className="left-panel-label">Отчет по документам</p>
         </Link>
       )}
 

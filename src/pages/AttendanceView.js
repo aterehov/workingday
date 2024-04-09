@@ -22,6 +22,7 @@ import MonthPicker from "@mui/lab/MonthPicker";
 import getDaysInMonth from "../functions/getDaysInMonth";
 import optional from "../functions/optional";
 import "../styles/attendanceview.css";
+import { Button } from "react-bootstrap";
 
 function AttendanceView() {
   const [date, setDate] = useState(
@@ -34,7 +35,7 @@ function AttendanceView() {
   );
   const [employees, setEmployees] = useState({});
   const [time, setTime] = useState({});
-  const [timePrepared, setTimePrepared] = useState(false);
+  // const [timePrepared, setTimePrepared] = useState(false);
   const [pretime, setPretime] = useState(null);
   useAsync(
     getJsonWithErrorHandlerFunc,
@@ -50,8 +51,12 @@ function AttendanceView() {
     if (pretime === null) {
       return;
     }
-    console.log("PRETIME");
-    console.log(pretime);
+
+    if (Object.keys(time).length != 0) {
+      return;
+    }
+    // console.log("PRETIME");
+    // console.log(pretime);
     // let emp = [];
     let emp = {};
     pretime.attendances.forEach((element) => {
@@ -61,13 +66,13 @@ function AttendanceView() {
     setEmployees(emp);
     let ptime = {};
     // let pretime = await API.listAllAttendance(formatDate(date), formatDate(date));
-    console.log("LENGTH");
-    console.log(employees.length);
+    // console.log("LENGTH");
+    // console.log(employees.length);
 
     // for (let index = 0; index < Object.keys(employees).length; index++) {
     Object.values(employees).forEach((element) => {
       // const element = employees[index];
-      console.log(element);
+      // console.log(element);
       let etime = {};
 
       for (
@@ -132,45 +137,45 @@ function AttendanceView() {
       // ptime[element.id] = j;
     });
     setTime(ptime);
-    setTimePrepared(true);
-  }, [pretime]);
+    // setTimePrepared(true);
+  }, [pretime, time]);
 
-  function setStart(v, emp_id) {
-    // console.log("V");
-    // console.log(v);
-    let d = new Date(v);
-    // let xxxx = dayjs(d);
-    // console.log("XXXXXXXXXXXXXXXX");
-    // console.log(xxxx);
-    time[emp_id]["start"] = new Date(
-      new Date(date).setHours(d.getHours(), d.getMinutes())
-    );
-  }
+  // function setStart(v, emp_id) {
+  //   // console.log("V");
+  //   // console.log(v);
+  //   let d = new Date(v);
+  //   // let xxxx = dayjs(d);
+  //   // console.log("XXXXXXXXXXXXXXXX");
+  //   // console.log(xxxx);
+  //   time[emp_id]["start"] = new Date(
+  //     new Date(date).setHours(d.getHours(), d.getMinutes())
+  //   );
+  // }
 
-  function setEnd(v, emp_id) {
-    let d = new Date(v);
-    time[emp_id]["end"] = new Date(
-      new Date(date).setHours(d.getHours(), d.getMinutes())
-    );
-  }
+  // function setEnd(v, emp_id) {
+  //   let d = new Date(v);
+  //   time[emp_id]["end"] = new Date(
+  //     new Date(date).setHours(d.getHours(), d.getMinutes())
+  //   );
+  // }
 
-  function changeAbsense(emp_id) {
-    let ntime = { ...time };
-    ntime[emp_id]["absense"] = !ntime[emp_id]["absense"];
-    setTime(ntime);
-  }
+  // function changeAbsense(emp_id) {
+  //   let ntime = { ...time };
+  //   ntime[emp_id]["absense"] = !ntime[emp_id]["absense"];
+  //   setTime(ntime);
+  // }
 
-  async function saveAttendance(e, emp_id) {
-    await API.addAttendance({
-      employee_id: emp_id,
-      start_date: formatDate(
-        time[emp_id]["absense"] ? date : time[emp_id]["start"]
-      ),
-      end_date: formatDate(
-        time[emp_id]["absense"] ? subDays(date, 1) : time[emp_id]["end"]
-      ),
-    });
-  }
+  // async function saveAttendance(e, emp_id) {
+  //   await API.addAttendance({
+  //     employee_id: emp_id,
+  //     start_date: formatDate(
+  //       time[emp_id]["absense"] ? date : time[emp_id]["start"]
+  //     ),
+  //     end_date: formatDate(
+  //       time[emp_id]["absense"] ? subDays(date, 1) : time[emp_id]["end"]
+  //     ),
+  //   });
+  // }
 
   const my_id = getCachedLogin();
   const [myInfo, setMyInfo] = useState(null);
@@ -224,6 +229,13 @@ function AttendanceView() {
   // }, []);
   // useEffect(() => {}, [date]);
 
+  useEffect(() => {
+    console.log("TIME USEEFFECT");
+    console.log(time);
+  }, [time]);
+
+  useEffect(() => {}, [date]);
+
   return !myInfo || !time ? null : (
     <div style={{ display: "flex" }}>
       {/* {console.log(optional(info.phones, info.phones[0]))} */}
@@ -233,6 +245,7 @@ function AttendanceView() {
           title="Информация от табельщиков"
           profpic={myInfo.photo_link}
           showfunctions={false}
+          username={myInfo.name}
         />
         <div>
           <div className="attendance-title-container">
@@ -247,6 +260,7 @@ function AttendanceView() {
             {/* <MonthCalendar /> */}
             {/* <MonthPicker /> */}
             <DatePicker
+              className="datepicker"
               format="MM/YY"
               views={["month", "year"]}
               defaultValue={dayjs(date)}
@@ -257,9 +271,19 @@ function AttendanceView() {
                 console.log(date);
                 // const formdate = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSX");
                 // const formdate = dayjs(v).format("yyyy-MM-dd");
+
+                setPretime(null);
+                setTime({});
                 setDate(date);
               }}
             />
+            {/* <button onClick={() => console.log(date)}>Show date</button> */}
+            <Button
+              className="attendance-search-employee-button"
+              sx={{ marginLeft: "auto" }}
+            >
+              Поиск сотрудника
+            </Button>
           </div>
           <TableContainer>
             <Table>

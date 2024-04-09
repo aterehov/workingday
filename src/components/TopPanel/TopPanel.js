@@ -11,9 +11,14 @@ import Function from "./Function";
 import optional from "../../functions/optional";
 import { useEffect } from "react";
 import API from "../../network/API";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function TopPanel({ profpic, title = "Мой профиль", showfunctions = true }) {
+function TopPanel({
+  profpic,
+  title = "Мой профиль",
+  showfunctions = true,
+  username,
+}) {
   let height = showfunctions ? 164 : 128;
   const navigate = useNavigate();
 
@@ -42,7 +47,7 @@ function TopPanel({ profpic, title = "Мой профиль", showfunctions = tr
           // height: height,
           // boxSizing: "border-box",
           zIndex: 1,
-          borderBottom: 0,
+          // borderBottom: 0,
         },
       }}
       variant="permanent"
@@ -56,7 +61,9 @@ function TopPanel({ profpic, title = "Мой профиль", showfunctions = tr
         <div className="top-panel-content">
           <p className="top-panel-title">{title}</p>
           <div className="top-panel-controls">
-            <BellIcon />
+            <Link to="/notifications">
+              <BellIcon />
+            </Link>
             {optional(
               profpic,
               <Image
@@ -67,7 +74,9 @@ function TopPanel({ profpic, title = "Мой профиль", showfunctions = tr
                 roundedCircle
               />
             )}
-            <p className="top-panel-mp-link">My Profile</p>
+            <Link to="/user/me" className="top-panel-mp-link">
+              {username ? username : "Мой профиль"}
+            </Link>
             {/* <AngleDownIcon /> */}
             <Button variant="outline-danger" onClick={logout}>
               Выйти

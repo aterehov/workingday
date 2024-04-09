@@ -22,7 +22,7 @@ function Notification(notif) {
               " " +
               optional(notif.sender.patronymic)}
           </p>
-          <p className="notif-on-doc">On Document - 3600</p>
+          {/* <p className="notif-on-doc">On Document - 3600</p> */}
           <p className="notif-text">{notif.text}</p>
         </Col>
         <Col className="notif-datetime-col">

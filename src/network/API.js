@@ -1,7 +1,7 @@
 import Cookies from "universal-cookie";
 
 class API {
-  static source = `http://51.250.110.96:8080/v1`;
+  static source = `https://working-day.online:8080/v1`;
   static cookies = new Cookies();
 
   constructor() {
@@ -356,6 +356,57 @@ class API {
           description: doc_description,
         },
         employee_ids: employee_ids,
+      },
+    });
+  }
+
+  static async listDocuments() {
+    return await this.authFetch({
+      path: "/documents/list",
+    });
+  }
+
+  static async downloadDocuments(id) {
+    return await this.authFetch({
+      path: "/documents/download",
+      queries: {
+        id: id,
+      },
+    });
+  }
+
+  static async signDocuments(id) {
+    return await this.authFetch({
+      path: "/documents/sign",
+      method: "POST",
+      queries: {
+        id: id,
+      },
+    });
+  }
+
+  static async listAllDocuments() {
+    return this.authFetch({
+      path: "/documents/list-all",
+    });
+  }
+
+  static async getSignsDocuments(document_id) {
+    return this.authFetch({
+      path: "/documents/get-signs",
+      queries: {
+        document_id: document_id,
+      },
+    });
+  }
+
+  static async fullSearch({ search_key, limit = 5 }) {
+    return await this.authFetch({
+      path: "/search/full",
+      method: "POST",
+      body: {
+        search_key: search_key,
+        limit: limit,
       },
     });
   }

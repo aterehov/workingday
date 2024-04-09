@@ -17,12 +17,12 @@ import getCachedLogin from "../functions/getCachedLogin";
 import "../styles/clearfix.css";
 
 function UserPage({ get_id = useParams }) {
-  console.log("GET ID");
-  console.log(get_id);
+  // console.log("GET ID");
+  // console.log(get_id);
   const { id } = get_id();
-  const my_id = get_id instanceof String ? id : getCachedLogin();
-  console.log("ID");
-  console.log(id);
+  const my_id = getCachedLogin();
+  // console.log("ID");
+  // console.log(id);
   const navigate = useNavigate();
   // const [end, setEnd] = useState(false);
   // const [data, setData] = useState(undefined);
@@ -44,7 +44,7 @@ function UserPage({ get_id = useParams }) {
     (args) => API.infoEmployee(args),
     [my_id],
   ]);
-  const [info, setInfo] = useState(false);
+  const [info, setInfo] = useState(null);
   useAsync(
     // async (args) =>
     //   await getJson(
@@ -88,13 +88,14 @@ function UserPage({ get_id = useParams }) {
   // console.log(optional(info.phones, info.phones[0]));
   return !info || !myInfo ? null : (
     <div style={{ display: "flex" }}>
-      {console.log(optional(info.phones, info.phones[0]))}
+      {/* {console.log(optional(info.phones, info.phones[0]))} */}
       <LeftPanel highlight="user" />
       <div>
         <TopPanel
           title={my_id == id ? "Мой профиль" : "Профиль сотрудника"}
           profpic={myInfo.photo_link}
-          showfunctions={my_id == id}
+          showfunctions={false}
+          username={myInfo.name}
         />
         <Container className="main-body" fluid>
           <Row>
@@ -102,14 +103,14 @@ function UserPage({ get_id = useParams }) {
               <h1 className="user-page-name">
                 {info.name +
                   " " +
-                  info.surname +
+                  optional(info.patronymic) +
                   " " +
-                  optional(info.patronymic)}
+                  info.surname}
               </h1>
-              <div className="user-page-position">
-                {/* <h2 className="no-margin font-props-inherit">Стажер</h2> */}
-                {/* <h2 className="no-margin font-props-inherit">Проктолог</h2> */}
-              </div>
+              {/* <div className="user-page-position">
+                <h2 className="no-margin font-props-inherit">Стажер</h2>
+                <h2 className="no-margin font-props-inherit">Проктолог</h2>
+              </div> */}
               <TitleField title="Email" value={optional(info.email)} />
               <TitleField
                 title="Phone Number"

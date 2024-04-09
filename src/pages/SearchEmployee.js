@@ -17,7 +17,7 @@ import { Button, Container, Form, Image, Row } from "react-bootstrap";
 import "../styles/overlay_search.css";
 import "../styles/search.css";
 import getCachedLogin from "../functions/getCachedLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconRender from "../components/IconRender/IconRender";
 
 function SearchEmployee() {
@@ -26,21 +26,24 @@ function SearchEmployee() {
   //   (args) => API.basicSearch(args),
   //   [{ search_key: "Илья" }],
   // ]);
-  const [info, setInfo] = useState(false);
+  const [info, setInfo] = useState(null);
   useAsync(getJsonWithErrorHandlerFunc, setInfo, [
     (args) => API.infoEmployee(args),
     [getCachedLogin()],
   ]);
-  console.log("SEARCH RESULT");
-  console.log(res);
+  // console.log("SEARCH RESULT");
+  // console.log(res);
 
   const [request, setRequest] = useState("");
   // useEffect(() => {}, [res]);
   useEffect(() => {
+    if (!info) {
+      return;
+    }
     document.getElementById("sp-drawer").style.height =
       document.getElementById("search-panel-all").offsetHeight.toString() +
       "px";
-  });
+  }, [info]);
 
   const navigate = useNavigate();
 
@@ -49,7 +52,7 @@ function SearchEmployee() {
     navigate("/login");
   }
 
-  return (
+  return !info ? null : (
     <div style={{ display: "flex", overflow: "hidden", maxWidth: "100vw" }}>
       <LeftPanel highlight="search" />
       <div>
@@ -93,7 +96,7 @@ function SearchEmployee() {
                     onClick={async (e) => {
                       e.preventDefault();
                       let r = await getJsonWithErrorHandlerFunc(
-                        (args) => API.basicSearch(args),
+                        (args) => API.fullSearch(args),
                         [{ search_key: request }]
                       );
                       if (r) {
@@ -207,7 +210,9 @@ function SearchEmployee() {
                     roundedCircle
                   />
                 )}
-                <p className="top-panel-mp-link">My Profile</p>
+                <Link to="/user/me" className="top-panel-mp-link">
+                  {info.name}
+                </Link>
                 {/* <AngleDownIcon /> */}
                 <Button variant="outline-danger" onClick={logout}>
                   Выйти
@@ -247,14 +252,14 @@ function SearchEmployee() {
                     height={80}
                     roundedCircle
                   />
-                  <a href={"/user/" + user.id} className="search-result-label">
+                  <Link to={"/user/" + user.id} className="search-result-label">
                     {/* {user.name + " " + user.surname} */}
                     <p className="search-result-label-p">{user.surname}</p>
                     <p className="search-result-label-p">{user.name}</p>
                     <p className="search-result-label-p">
                       {optional(user.patronymic)}
                     </p>
-                  </a>
+                  </Link>
                 </div>
               );
             })}

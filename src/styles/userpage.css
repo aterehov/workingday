@@ -5,21 +5,22 @@
 .user-page-name {
   width: 468px;
   height: 125px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 48px;
   font-weight: 400;
   margin-bottom: 5px;
   line-height: 62px;
+  margin-bottom: 60px;
 }
 
 .user-page-position {
   width: 272px;
   height: 84px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 32px;
   font-weight: 400;
   line-height: 42px;
-  margin-bottom: 110px;
+  /* margin-bottom: 110px; */
 }
 
 .user-page-col-padding {
@@ -28,7 +29,7 @@
 
 .title-field {
   height: 84px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 24px;
@@ -69,18 +70,14 @@
   padding-right: 0px;
 }
 
-
-
 .main-body {
   margin-left: 33px;
 }
 
-
-
 .edit-button {
   width: 556px;
   height: 56px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
   color: #323130;
   font-weight: 500;
@@ -98,8 +95,6 @@
   font-weight: inherit;
   line-height: inherit;
 }
-
-
 
 .no-padding {
   padding: 0px;

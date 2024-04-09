@@ -11,6 +11,7 @@
   background-color: #f0f0f0;
   padding: 30px;
   font-weight: 600;
+  width: 720px;
 }
 
 .notif-sub-header {
@@ -23,7 +24,7 @@
   margin-bottom: 0;
 }
 
-.by-date-dropdown-toggle {
+.viewdoc-button {
   width: 120px;
   height: 36px;
   color: #323130;
@@ -34,6 +35,8 @@
   line-height: 17px;
   border: #5e5c5a 1px solid;
   border-radius: 2px;
+  display: block;
+  /* align-self: flex-end; */
   /* fill: #fff; */
 }
 
@@ -57,7 +60,7 @@
   font-weight: 500;
 }
 
-.notif-text {
+.viewdoc-description {
   width: 458px;
   /* height: 24px; */
   font-family: "Roboto", sans-serif;
@@ -65,6 +68,7 @@
   font-size: 15px;
   line-height: 24px;
   font-weight: 500;
+  white-space: pre-wrap;
 }
 
 .notif-datetime {
@@ -88,7 +92,6 @@
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 2px solid #dedede;
-  width: 660px;
 }
 
 .no-padding {
@@ -166,10 +169,16 @@
   max-width: fit-content;
 }
 
-.by-date-dropdown-toggle::after {
+/* .by-date-dropdown-toggle::after {
   display: none;
-}
+} */
 
 .notif-filter-check {
   /* flex-direction: row-reverse; */
+}
+
+.doc-buttons-col {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }

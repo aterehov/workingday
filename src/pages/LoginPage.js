@@ -32,9 +32,9 @@ function LoginPage() {
     // }
   };
 
-  function logout() {
-    API.logout();
-  }
+  // function logout() {
+  //   API.logout();
+  // }
 
   return (
     <>
@@ -67,9 +67,9 @@ function LoginPage() {
           </Form>
         </Card.Body>
       </Card>
-      <Link to="/">Назад</Link>
-      <Button onClick={TestFunction}>Test</Button>
-      <Button onClick={logout}>Выйти</Button>
+      {/* <Link to="/">Назад</Link> */}
+      {/* <Button onClick={TestFunction}>Test</Button> */}
+      {/* <Button onClick={logout}>Выйти</Button> */}
     </>
   );
 }

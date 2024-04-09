@@ -1,3 +1,42 @@
 .receivers-formcontrol {
+  /* width: 100%; */
+  flex-grow: 40;
+}
+
+.senddoc-sendtoall {
+  flex-grow: 1;
+}
+
+.send-documents-container {
+  width: 100vw;
+}
+
+.senddoc-name {
+  margin-bottom: 32px;
+}
+
+.senddoc-attach-row {
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.senddoc-filename {
+  margin-left: 5px;
+}
+
+.senddoc-receivers-row {
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 16px;
+}
+
+.senddoc-signrequired {
+  margin-bottom: 16px;
+}
+
+.senddoc-sendbutton {
   width: 100%;
 }

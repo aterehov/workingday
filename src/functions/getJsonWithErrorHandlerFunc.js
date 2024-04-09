@@ -11,7 +11,9 @@ async function getJsonWithErrorHandlerFunc(func, args = []) {
   return await (async () => {
     const d = await func(...args);
     if (!d.ok) {
-      alert("ERROR!!!");
+      alert(
+        "Произошла ошибка при обращении к серверу. Проверьте интернет-соединение и обновите страницу."
+      );
       return "";
     }
     return d.json();

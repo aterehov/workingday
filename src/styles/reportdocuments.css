@@ -1,0 +1,76 @@
+.report-doc-employee-signed {
+  border: 1px white solid;
+  background-color: green;
+}
+
+.report-doc-employee-unsigned {
+  border: 1px white solid;
+  background-color: red;
+}
+
+.report-doc-preformat {
+  white-space: pre-wrap;
+  width: 458px;
+  /* height: 24px; */
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.report-doc-sent-area {
+  background-color: #f0f0f0;
+  padding: 30px;
+  font-weight: 600;
+}
+
+.report-doc-name {
+  width: 458px;
+  height: 24px;
+  font-family: "Roboto", sans-serif;
+  color: #030303;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.report-doc-sent-doc {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #dedede;
+  /* width: 660px; */
+}
+
+.report-doc-info-col {
+  padding-left: 14px;
+  padding-right: 0px;
+}
+
+.report-doc-button-col {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 20px;
+}
+
+.report-doc-button {
+  width: 120px;
+  height: 36px;
+  color: #323130;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 17px;
+  border: #5e5c5a 1px solid;
+  border-radius: 2px;
+  /* fill: #fff; */
+}
+
+.report-doc-user-link {
+  color: white;
+}

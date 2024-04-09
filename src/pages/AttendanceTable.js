@@ -29,8 +29,8 @@ import "../styles/attendance.css";
 function AttendanceTable() {
   const [date, setDate] = useState(new Date().setHours(0, 0, 0, 0));
   const [employees, setEmployees] = useState([]);
-  const [time, setTime] = useState(null);
-  const [timePrepared, setTimePrepared] = useState(false);
+  const [time, setTime] = useState({});
+  // const [timePrepared, setTimePrepared] = useState(false);
   const [pretime, setPretime] = useState(null);
   useAsync(
     getJsonWithErrorHandlerFunc,
@@ -46,8 +46,12 @@ function AttendanceTable() {
     if (pretime === null) {
       return;
     }
-    console.log("PRETIME");
-    console.log(pretime);
+
+    if (Object.keys(time).length != 0) {
+      return;
+    }
+    // console.log("PRETIME");
+    // console.log(pretime);
     let emp = [];
     pretime.attendances.forEach((element) => {
       emp.push(element.employee);
@@ -55,11 +59,11 @@ function AttendanceTable() {
     setEmployees(emp);
     let ptime = {};
     // let pretime = await API.listAllAttendance(formatDate(date), formatDate(date));
-    console.log("LENGTH");
-    console.log(employees.length);
+    // console.log("LENGTH");
+    // console.log(employees.length);
     for (let index = 0; index < employees.length; index++) {
       const element = employees[index];
-      console.log(element);
+      // console.log(element);
       let start = new Date(
         Date.parse(
           pretime.attendances.find((item) => {
@@ -95,8 +99,8 @@ function AttendanceTable() {
       ptime[element.id] = j;
     }
     setTime(ptime);
-    setTimePrepared(true);
-  }, [pretime]);
+    // setTimePrepared(true);
+  }, [pretime, time]);
 
   function setStart(v, emp_id) {
     // console.log("V");
@@ -196,10 +200,11 @@ function AttendanceTable() {
           title="Учет рабочего времени"
           profpic={myInfo.photo_link}
           showfunctions={false}
+          username={myInfo.name}
         />
         <div>
-          <button onClick={() => console.log(date)}>Show date</button>
-          <button onClick={() => console.log(time)}>Show time</button>
+          {/* <button onClick={() => console.log(date)}>Show date</button> */}
+          {/* <button onClick={() => console.log(time)}>Show time</button> */}
           <div className="attendance-title-container">
             <Typography
               className="attendance-title"
@@ -212,10 +217,14 @@ function AttendanceTable() {
             <DatePicker
               format="DD.MM.YYYY"
               defaultValue={dayjs(date)}
+              // className="attendance-table-datepicker"
+              sx={{ marginLeft: "15px" }}
               onChange={(v) => {
                 const date = new Date(v);
                 // const formdate = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSX");
                 // const formdate = dayjs(v).format("yyyy-MM-dd");
+                setPretime(null);
+                setTime({});
                 setDate(date);
               }}
             />
@@ -256,7 +265,7 @@ function AttendanceTable() {
                       </TableCell>
                       <TableCell>
                         <Container>
-                          <Row>
+                          <Row className="attendancetable-status-row">
                             <Col>
                               <Typography variant="body1">Начало</Typography>
                               <TimePicker
@@ -301,20 +310,20 @@ function AttendanceTable() {
                               label="Отсутствие"
                             />
 
-                            <button
+                            {/* <button
                               onClick={() => {
                                 console.log(time[emp.id]["start"]);
                               }}
                             >
                               Start Date
-                            </button>
-                            <button
+                            </button> */}
+                            {/* <button
                               onClick={() => {
                                 console.log(time[emp.id]["end"]);
                               }}
                             >
                               End Date
-                            </button>
+                            </button> */}
 
                             <Button onClick={(e) => saveAttendance(e, emp.id)}>
                               Сохранить

@@ -16,15 +16,15 @@ import convertNull from "../functions/convertNull";
 function UserEditPage({ get_id = useParams }) {
   const { id } = get_id();
   const navigate = useNavigate();
-  const [info, setInfo] = useState(false);
+  const [info, setInfo] = useState(null);
   useAsync(getJsonWithErrorHandlerFunc, setInfo, [
     (args) => API.infoEmployee(args),
     [id],
   ]);
 
-  const [name, setName] = useState("");
-  const [patronymic, setPatronymic] = useState("");
-  const [surname, setSurname] = useState("");
+  // const [name, setName] = useState("");
+  // const [patronymic, setPatronymic] = useState("");
+  // const [surname, setSurname] = useState("");
   const [birthday, setBirthday] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -38,9 +38,9 @@ function UserEditPage({ get_id = useParams }) {
     if (!info) {
       return;
     }
-    setName(info.name);
-    setPatronymic(optional(info.patronymic));
-    setSurname(info.surname);
+    // setName(info.name);
+    // setPatronymic(optional(info.patronymic));
+    // setSurname(info.surname);
     setBirthday(optional(info.birthday));
     setEmail(optional(info.email));
     setPhone(optional(info.phones, optional(info.phones[0])));
@@ -49,37 +49,37 @@ function UserEditPage({ get_id = useParams }) {
     // setPhoto(optional(info.photo_link));
   }, [info]);
 
-  console.log("INFO");
-  console.log(info);
+  // console.log("INFO");
+  // console.log(info);
 
   async function onClick(event) {
     event.preventDefault();
-    console.log("name");
-    console.log(name);
-    console.log("surname");
-    console.log(surname);
-    console.log("patronymic");
-    console.log(patronymic);
-    console.log("birthday");
-    console.log(birthday);
-    console.log("email");
-    console.log(email);
-    console.log("phone");
-    console.log(phone);
-    console.log("telegram_id");
-    console.log(telegram_id);
-    console.log("vk_id");
-    console.log(vk_id);
-    console.log("photo data");
-    console.log(photoData);
+    // console.log("name");
+    // console.log(name);
+    // console.log("surname");
+    // console.log(surname);
+    // console.log("patronymic");
+    // console.log(patronymic);
+    // console.log("birthday");
+    // console.log(birthday);
+    // console.log("email");
+    // console.log(email);
+    // console.log("phone");
+    // console.log(phone);
+    // console.log("telegram_id");
+    // console.log(telegram_id);
+    // console.log("vk_id");
+    // console.log(vk_id);
+    // console.log("photo data");
+    // console.log(photoData);
     let resphoto;
     if (photoData) {
       let url = (await (await API.uploadPhotoProfile()).json()).url;
-      console.log("PHOTO DATA");
-      console.log(photoData);
+      // console.log("PHOTO DATA");
+      // console.log(photoData);
       let file = new File([photoData], "image.jpg");
-      console.log("FILE");
-      console.log(file);
+      // console.log("FILE");
+      // console.log(file);
       resphoto = await API.xfetch({
         path: url,
         isabsolute: true,
@@ -112,19 +112,24 @@ function UserEditPage({ get_id = useParams }) {
     reader.onload = (e) => {
       // console.log("image data: ", e.target.result.split(",", 2)[1]);
       // setPhotoData(e.target.result.split(",", 2)[1]);
-      console.log("image data: ", e.target.result);
+      // console.log("image data: ", e.target.result);
       setPhotoData(e.target.result);
     };
     // setPhotoData(e.target.result);
     // setSelectedFile(e.target.value);
-    console.log(photoData);
+    // console.log(photoData);
   };
 
   return !info ? null : (
     <div style={{ display: "flex" }}>
-      <LeftPanel />
+      <LeftPanel highlight="user" />
       <div>
-        <TopPanel title="Настройки аккаунта" profpic={info.photo_link} />
+        <TopPanel
+          title="Настройки аккаунта"
+          profpic={info.photo_link}
+          username={info.name}
+          showfunctions={false}
+        />
         <div className="main-content">
           <div className="overlay-container">
             <Image
@@ -185,7 +190,7 @@ function UserEditPage({ get_id = useParams }) {
 
           <form id="edit-profile-form">
             <Container className="form-container" fluid>
-              <Row>
+              {/* <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="name">
                     First Name
@@ -228,7 +233,7 @@ function UserEditPage({ get_id = useParams }) {
                     onChange={(e) => setSurname(e.target.value)}
                   />
                 </Col>
-              </Row>
+              </Row> */}
               <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="birthday">
@@ -308,7 +313,7 @@ function UserEditPage({ get_id = useParams }) {
                   />
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="job">
                     Job Title
@@ -322,8 +327,8 @@ function UserEditPage({ get_id = useParams }) {
                     defaultValue="Software Engineer"
                   />
                 </Col>
-              </Row>
-              <Row>
+              </Row> */}
+              {/* <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="department">
                     Department
@@ -350,8 +355,8 @@ function UserEditPage({ get_id = useParams }) {
                     defaultValue="New York"
                   />
                 </Col>
-              </Row>
-              <Row>
+              </Row> */}
+              {/* <Row>
                 <Col className="form-col">
                   <label className="edit-label" for="country">
                     Country
@@ -378,7 +383,7 @@ function UserEditPage({ get_id = useParams }) {
                     defaultValue="English"
                   />
                 </Col>
-              </Row>
+              </Row> */}
               <Row>
                 <Col className="form-col">
                   {/* <input type="submit" value="Save Changes" /> */}

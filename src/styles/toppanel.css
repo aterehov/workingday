@@ -3,7 +3,7 @@
   margin-left: 48px;
   font-family: "Roboto";
   font-size: 24px;
-  width: 200px;
+  /* width: 200px; */
   line-height: 28px;
   font-weight: 700;
 }
@@ -17,17 +17,18 @@
 }
 
 .top-panel-mp-link {
-  margin-left: 16px;
-  margin-right: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 0px;
   margin-top: 0px;
-  width: 82px;
+  /* width: 82px; */
   height: 18px;
   font-family: "Roboto";
   font-size: 16px;
   line-height: 18px;
   font-weight: 500;
   text-align: center;
+  color: black;
 }
 
 .top-panel-mp-more {
