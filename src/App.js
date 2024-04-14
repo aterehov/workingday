@@ -29,6 +29,7 @@ import { setDefaultOptions } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import { useEffect } from "react";
+import UserAdd from "./pages/UserAdd";
 
 // const theme = createTheme(ruRU);
 
@@ -68,6 +69,7 @@ function App() {
           <Route path="/documents" element={<ViewDocuments />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/documents/report" element={<ReportDocuments />} />
+          <Route path="/user/add" element={<UserAdd />} />
         </Routes>
       </BrowserRouter>
     </LocalizationProvider>

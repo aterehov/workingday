@@ -111,3 +111,8 @@
 .search-result-profpic {
   object-fit: cover;
 }
+
+.add-employee-button {
+  height: 48px;
+  margin-top: 16px;
+}

@@ -50,7 +50,7 @@ function LeftPanel({ highlight }) {
       <Link className="left-panel-link" to="/search">
         <IconRender
           className="left-panel-icon"
-          path="/images/icons/search.svg"
+          path="/images/icons/users.svg"
           width="16px"
           height="16px"
           iwidth="16px"
@@ -59,7 +59,7 @@ function LeftPanel({ highlight }) {
           // addstyle={{ display: "flex" }}
         />
 
-        <p className="left-panel-label">Поиск сотрудников</p>
+        <p className="left-panel-label">Сотрудники</p>
       </Link>
       <Link className="left-panel-link" to="/notifications">
         <IconRender

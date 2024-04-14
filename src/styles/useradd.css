@@ -1,0 +1,23 @@
+.user-add-container {
+  /* min-width: max-content; */
+  /* max-width: fit-content; */
+  /* width: fit-content; */
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.useradd-right-col {
+  /* width: 100%; */
+  min-width: 300px;
+  /* width: 500px; */
+  /* flex-basis: 300px; */
+  /* flex-grow: 1; */
+  /* max-width: 40%; */
+  max-width: 500px;
+}
+
+.useradd-left-col {
+  /* max-width: fit-content; */
+  /* min-width: 250px; */
+  max-width: 250px;
+}
