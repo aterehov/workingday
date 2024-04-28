@@ -10,7 +10,15 @@
   font-weight: 400;
   margin-bottom: 5px;
   line-height: 62px;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
+}
+
+.user-page-delete-button {
+  margin-bottom: 40px;
+}
+
+.user-page-delete-button-replacer {
+  height: 78px;
 }
 
 .user-page-position {

@@ -291,6 +291,7 @@ function Calendar() {
           title="Учет рабочего времени"
           profpic={myInfo.photo_link}
           showfunctions={false}
+          username={myInfo.name}
         />
         <div>
           <DateCalendar

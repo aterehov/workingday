@@ -152,7 +152,7 @@ function UserAdd() {
       name: name,
       surname: surname,
       patronymic: midname,
-      role: "user",
+      role: role,
     });
     let addresjson = await addres.json();
     setLogin(addresjson.login);
@@ -183,18 +183,13 @@ function UserAdd() {
     window.location.reload();
   }
 
+  const [role, setRole] = useState("user");
+
   return (
     <div style={{ display: "flex", overflow: "hidden", maxWidth: "100vw" }}>
       <LeftPanel highlight="search" />
       <div>
-        <SearchPanel
-          setRequest={(e) => {
-            e.preventDefault();
-          }}
-          searchFunc={(e) => {
-            e.preventDefault();
-          }}
-        />
+        <SearchPanel setOuterRequest={(e) => {}} searchFunc={(e) => {}} />
         <Container className="user-add-container">
           <Form>
             <Row
@@ -319,6 +314,80 @@ function UserAdd() {
                           optional(emp.patronymic)}
                       </MenuItem>
                     ))}
+                  </Select>
+                </FormControl>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col className="useradd-left-col">
+                <Typography variant="body1">Роль</Typography>
+              </Col>
+              <Col className="useradd-right-col">
+                {/* <Form.Control type="text" /> */}
+                <FormControl
+                  sx={{
+                    // minWidth: "300px",
+                    width: "100%",
+                  }}
+                  // className="useradd-col"
+                >
+                  <InputLabel id="receivers-label">Выберите роль</InputLabel>
+                  <Select
+                    fullWidth
+                    // sx={{ width: "100%" }}
+                    // style={{ width: "100%" }}
+                    className="receivers-select"
+                    labelId="receivers-label"
+                    // placeholder="Получатели"
+                    // multiple
+                    value={role}
+                    input={
+                      <OutlinedInput id="select-multiple-chip" label="Роль" />
+                    }
+                    // renderValue={(selected) => (
+                    //   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    //     {/* {console.log("SELECTED")} */}
+                    //     {/* {console.log(selected)} */}
+                    //     {selected.map((value) => (
+                    //       <Chip
+                    //         key={value}
+                    //         label={(() => {
+                    //           let thisemp = Object.values(employees).find((emp) => {
+                    //             return value == emp.id;
+                    //           });
+                    //           return (
+                    //             thisemp.surname +
+                    //             " " +
+                    //             thisemp.name +
+                    //             " " +
+                    //             optional(thisemp.patronymic)
+                    //           );
+                    //         })()}
+                    //       />
+                    //     ))}
+                    //   </Box>
+                    // )}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    {/* {Object.values(employees).map((emp) => (
+                      <MenuItem key={emp.id} value={emp.id}>
+                        {emp.surname +
+                          " " +
+                          emp.name +
+                          " " +
+                          optional(emp.patronymic)}
+                      </MenuItem>
+                    ))} */}
+                    <MenuItem key="user" value="user">
+                      Сотрудник
+                    </MenuItem>
+                    <MenuItem key="manager" value="manager">
+                      Табельщик
+                    </MenuItem>
+                    <MenuItem key="admin" value="admin">
+                      Бухгалтер
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </Col>

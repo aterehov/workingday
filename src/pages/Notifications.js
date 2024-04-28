@@ -35,6 +35,7 @@ function Notifications() {
     "vacation_approved",
     "vacation_denied",
     "attendance_added",
+    "generic",
   ]);
 
   function changeShowState(type) {
@@ -124,6 +125,13 @@ function Notifications() {
                           label="Добавлена информация о рабочем времени"
                           defaultChecked={true}
                           onChange={() => changeShowState("attendance_added")}
+                        />
+                        <Form.Check
+                          type="checkbox"
+                          id="f_generic"
+                          label="Общая информация"
+                          defaultChecked={true}
+                          onChange={() => changeShowState("generic")}
                         />
                       </Col>
                     </Row>

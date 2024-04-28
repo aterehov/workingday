@@ -137,6 +137,15 @@ function LeftPanel({ highlight }) {
         <p className="left-panel-label">Календарь</p>
       </Link>
 
+      <Link className="left-panel-link" to="/absense/request">
+        <IconRender
+          className="left-panel-icon"
+          path="/images/icons/vacation.svg"
+          addstyle={highlight == "absenserequest" ? highlight_style : {}}
+        />
+        <p className="left-panel-label">Запрос отпуска</p>
+      </Link>
+
       {optional(
         getCachedRole() == "admin",
         <Link className="left-panel-link" to="/documents/report">

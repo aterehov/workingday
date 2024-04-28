@@ -3,6 +3,10 @@
   border-collapse: collapse;
 }
 
+.attendance-view-cell-weekend {
+  background-color: lightcoral;
+}
+
 .datepicker {
   margin-left: 10px;
 }

@@ -185,18 +185,19 @@ class API {
     console.log(r);
 
     if (r && r.token) {
-      this.cookies.set("login", login);
-      this.cookies.set("auth_token", r.token);
-      this.cookies.set("role", r.role);
+      // this.logout();
+      this.cookies.set("login", login, { path: "/" });
+      this.cookies.set("auth_token", r.token, { path: "/" });
+      this.cookies.set("role", r.role, { path: "/" });
       return true;
     }
     return false;
   }
 
   static logout() {
-    this.cookies.remove("login");
-    this.cookies.remove("auth_token");
-    this.cookies.remove("role");
+    this.cookies.remove("login", { path: "/" });
+    this.cookies.remove("auth_token", { path: "/" });
+    this.cookies.remove("role", { path: "/" });
   }
 
   static async notifications({ earlier_than }) {
@@ -403,6 +404,17 @@ class API {
   static async fullSearch({ search_key, limit = 5 }) {
     return await this.authFetch({
       path: "/search/full",
+      method: "POST",
+      body: {
+        search_key: search_key,
+        limit: limit,
+      },
+    });
+  }
+
+  static async suggestSearch({ search_key, limit }) {
+    return await this.authFetch({
+      path: "/search/suggest",
       method: "POST",
       body: {
         search_key: search_key,

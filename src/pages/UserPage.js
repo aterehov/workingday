@@ -15,12 +15,14 @@ import getJson from "../functions/getJson";
 import getJsonWithErrorHandlerFunc from "../functions/getJsonWithErrorHandlerFunc";
 import getCachedLogin from "../functions/getCachedLogin";
 import "../styles/clearfix.css";
+import getCachedRole from "../functions/getCachedRole";
 
 function UserPage({ get_id = useParams }) {
   // console.log("GET ID");
   // console.log(get_id);
   const { id } = get_id();
   const my_id = getCachedLogin();
+  const my_role = getCachedRole();
   // console.log("ID");
   // console.log(id);
   const navigate = useNavigate();
@@ -107,12 +109,26 @@ function UserPage({ get_id = useParams }) {
                   " " +
                   info.surname}
               </h1>
+              {my_role == "admin" && id != my_id ? (
+                <Button
+                  className="user-page-delete-button"
+                  variant="danger"
+                  onClick={() => {
+                    API.removeEmployee({ employee_id: id });
+                    alert("Пользователь удален");
+                  }}
+                >
+                  Удалить
+                </Button>
+              ) : (
+                <div className="user-page-delete-button-replacer"></div>
+              )}
               {/* <div className="user-page-position">
                 <h2 className="no-margin font-props-inherit">Стажер</h2>
                 <h2 className="no-margin font-props-inherit">Проктолог</h2>
               </div> */}
               <TitleField
-                title="Электронная почтв"
+                title="Электронная почта"
                 value={optional(info.email)}
               />
               <TitleField

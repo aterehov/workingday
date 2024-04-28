@@ -1,6 +1,6 @@
-import { Drawer } from "@mui/material";
+import { Drawer, Tooltip, Typography } from "@mui/material";
 import Config from "../config/UserPageConfig";
-import { Button, Form, Image } from "react-bootstrap";
+import { Button, Container, Form, Image, Row } from "react-bootstrap";
 import getJsonWithErrorHandlerFunc from "../functions/getJsonWithErrorHandlerFunc";
 import API from "../network/API";
 import IconRender from "./IconRender/IconRender";
@@ -10,8 +10,9 @@ import optional from "../functions/optional";
 import { useEffect, useState } from "react";
 import useAsync from "../functions/hooks/useAsync";
 import getCachedLogin from "../functions/getCachedLogin";
+import getCachedRole from "../functions/getCachedRole";
 
-function SearchPanel({ setRequest, searchFunc }) {
+function SearchPanel({ setOuterRequest, searchFunc }) {
   const navigate = useNavigate();
 
   const [info, setInfo] = useState(null);
@@ -33,6 +34,16 @@ function SearchPanel({ setRequest, searchFunc }) {
       document.getElementById("search-panel-all").offsetHeight.toString() +
       "px";
   }, [info]);
+
+  const [request, setRequest] = useState("");
+  const [suggest, setSuggest] = useState({ employees: [] });
+
+  useAsync(
+    getJsonWithErrorHandlerFunc,
+    setSuggest,
+    [(args) => API.suggestSearch(args), [{ search_key: request, limit: 5 }]],
+    [request]
+  );
 
   return !info ? null : (
     <Drawer
@@ -63,30 +74,58 @@ function SearchPanel({ setRequest, searchFunc }) {
           {/* <p className="top-panel-title">{"TITLE"}</p> */}
           <Form>
             <div className="overlay-container-search">
-              <Form.Control
-                className="overlay-bgimage-search search-field"
-                type="text"
-                placeholder="Поиск коллег"
-                onChange={(e) => setRequest(e.target.value)}
-              />
-              {/* <Button */}
-              <button
-                className="overlay-fgimage-search search-button"
-                onClick={
-                  // async (e) => {
-                  // e.preventDefault();
-                  // let r = await getJsonWithErrorHandlerFunc(
-                  //   (args) => API.fullSearch(args),
-                  //   [{ search_key: request }]
-                  // );
-                  // if (r) {
-                  //   setRes(r.employees);
-                  // }
-                  searchFunc
+              <Tooltip
+                open={request}
+                title={
+                  <Container>
+                    {suggest.employees.length > 0
+                      ? suggest.employees.map((emp) => (
+                          <Row>
+                            <Link
+                              className="search-suggest-link"
+                              to={"/user/" + emp.id}
+                            >
+                              <Typography variant="body2">
+                                {emp.surname +
+                                  " " +
+                                  emp.name +
+                                  " " +
+                                  optional(emp.patronymic)}
+                              </Typography>
+                            </Link>
+                          </Row>
+                        ))
+                      : "Ничего не найдено"}
+                  </Container>
                 }
-                // }
               >
-                {/* <div
+                <Form.Control
+                  className="overlay-bgimage-search search-field"
+                  type="text"
+                  placeholder="Поиск коллег"
+                  onChange={(e) => {
+                    setRequest(e.target.value);
+                    setOuterRequest(e.target.value);
+                  }}
+                />
+                {/* <Button */}
+                <button
+                  className="overlay-fgimage-search search-button"
+                  onClick={
+                    // async (e) => {
+                    // e.preventDefault();
+                    // let r = await getJsonWithErrorHandlerFunc(
+                    //   (args) => API.fullSearch(args),
+                    //   [{ search_key: request }]
+                    // );
+                    // if (r) {
+                    //   setRes(r.employees);
+                    // }
+                    (e) => searchFunc(e)
+                  }
+                  // }
+                >
+                  {/* <div
                       // id="a459dbb7a-2477-49cd-91fe-029499c81cc9"
                       style={{
                         display: "flex",
@@ -110,16 +149,17 @@ function SearchPanel({ setRequest, searchFunc }) {
                         <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
                       </svg>
                     </div> */}
-                <IconRender
-                  path="/images/icons/search.svg"
-                  width="16px"
-                  height="16px"
-                  iwidth="16px"
-                  iheight="16px"
-                  addstyle={{ display: "flex" }}
-                />
-              </button>
-              {/* </Button> */}
+                  <IconRender
+                    path="/images/icons/search.svg"
+                    width="16px"
+                    height="16px"
+                    iwidth="16px"
+                    iheight="16px"
+                    addstyle={{ display: "flex" }}
+                  />
+                </button>
+                {/* </Button> */}
+              </Tooltip>
             </div>
           </Form>
           {/* <Image
@@ -180,14 +220,18 @@ function SearchPanel({ setRequest, searchFunc }) {
           {/* <Form>
                 <Form.Control type="text" placeholder="Поиск коллег" />
               </Form> */}
-          <Button
-            onClick={() => {
-              navigate("/user/add");
-            }}
-            className="add-employee-button"
-          >
-            Добавить сотрудника
-          </Button>
+
+          {optional(
+            getCachedRole() == "admin",
+            <Button
+              onClick={() => {
+                navigate("/user/add");
+              }}
+              className="add-employee-button"
+            >
+              Добавить сотрудника
+            </Button>
+          )}
           <div className="search-controls">
             <BellIcon />
             {optional(

@@ -121,10 +121,26 @@ function AttendanceTable() {
     );
   }
 
+  function setDuration(v, emp_id) {
+    let d = new Date(v);
+    time[emp_id]["start"] = new Date(new Date(date).setHours(9, 0, 0));
+    time[emp_id]["end"] = new Date(
+      new Date(date).setHours(9 + d.getHours(), d.getMinutes())
+    );
+  }
+
   function changeAbsense(emp_id) {
     let ntime = { ...time };
     ntime[emp_id]["absense"] = !ntime[emp_id]["absense"];
     setTime(ntime);
+  }
+
+  function markAll(e) {
+    employees.forEach((emp) => {
+      setDuration(new Date(date).setHours(8, 0, 0), emp.id);
+      saveAttendance(undefined, emp.id);
+    });
+    alert("Посещения проставлены");
   }
 
   async function saveAttendance(e, emp_id) {
@@ -203,8 +219,8 @@ function AttendanceTable() {
           username={myInfo.name}
         />
         <div>
-          {/* <button onClick={() => console.log(date)}>Show date</button> */}
-          {/* <button onClick={() => console.log(time)}>Show time</button> */}
+          <button onClick={() => console.log(date)}>Show date</button>
+          <button onClick={() => console.log(time)}>Show time</button>
           <div className="attendance-title-container">
             <Typography
               className="attendance-title"
@@ -228,6 +244,7 @@ function AttendanceTable() {
                 setDate(date);
               }}
             />
+            <Button onClick={(e) => markAll(e)}>Проставить всем</Button>
           </div>
           {/* {date ? ( */}
           <TableContainer component={"div"}>
@@ -266,6 +283,8 @@ function AttendanceTable() {
                       <TableCell>
                         <Container>
                           <Row className="attendancetable-status-row">
+                            {/* 
+                            // Версия табеля с выбором времени начала и конца работы
                             <Col>
                               <Typography variant="body1">Начало</Typography>
                               <TimePicker
@@ -298,6 +317,38 @@ function AttendanceTable() {
                                 disabled={time[emp.id]["absense"]}
                                 onChange={(v) => setEnd(v, emp.id)}
                               />
+                            </Col> */}
+
+                            {/* // Версия табеля с выбором длительности работы */}
+                            <Col>
+                              {/* <Typography variant="body1">Конец</Typography> */}
+                              <TimePicker
+                                ampm={false}
+                                value={(() => {
+                                  // let x = dayjs(
+                                  //   time[emp.id]["end"] - time[emp.id]["start"]
+                                  // );
+                                  // return x;
+                                  // let d = new Date(
+                                  //   new Date(date).setSeconds(
+                                  //     time[emp.id]["end"] -
+                                  //       time[emp.id]["start"]
+                                  //   )
+                                  // );
+                                  // return dayjs(d);
+                                  let delta =
+                                    time[emp.id]["end"] - time[emp.id]["start"];
+                                  let minutes = (delta % 3600000) / 60000;
+                                  let hours =
+                                    (delta - (delta % 3600000)) / 3600000;
+                                  let x = new Date(
+                                    new Date(date).setHours(hours, minutes)
+                                  );
+                                  return dayjs(x);
+                                })()}
+                                disabled={time[emp.id]["absense"]}
+                                onChange={(v) => setDuration(v, emp.id)}
+                              />
                             </Col>
 
                             <FormControlLabel
@@ -310,20 +361,20 @@ function AttendanceTable() {
                               label="Отсутствие"
                             />
 
-                            {/* <button
+                            <button
                               onClick={() => {
                                 console.log(time[emp.id]["start"]);
                               }}
                             >
                               Start Date
-                            </button> */}
-                            {/* <button
+                            </button>
+                            <button
                               onClick={() => {
                                 console.log(time[emp.id]["end"]);
                               }}
                             >
                               End Date
-                            </button> */}
+                            </button>
 
                             <Button onClick={(e) => saveAttendance(e, emp.id)}>
                               Сохранить

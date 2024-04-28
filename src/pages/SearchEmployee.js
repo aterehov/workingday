@@ -61,7 +61,7 @@ function SearchEmployee() {
       <LeftPanel highlight="search" />
       <div>
         <SearchPanel
-          setRequest={setRequest}
+          setOuterRequest={setRequest}
           searchFunc={searchFunc}
           // info={info}
         />

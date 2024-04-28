@@ -323,7 +323,16 @@ function AttendanceView() {
                       <div></div>
                     ) : (
                       Object.keys(time[emp.id]).map((day) => (
-                        <TableCell className="attendance-view-cell">
+                        <TableCell
+                          className={
+                            "attendance-view-cell" +
+                            ([0, 6].includes(
+                              new Date(new Date(date).setDate(day)).getDay()
+                            )
+                              ? " attendance-view-cell-weekend"
+                              : "")
+                          }
+                        >
                           <Typography variant="body1">
                             {time[emp.id][day]["absense"]
                               ? "Н"

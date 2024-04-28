@@ -116,3 +116,7 @@
   height: 48px;
   margin-top: 16px;
 }
+
+.search-suggest-link {
+  color: white;
+}

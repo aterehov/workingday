@@ -1,7 +1,21 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import optional from "../functions/optional";
+import API from "../network/API";
 
 function Notification(notif) {
+  async function send_verdict(approve) {
+    let res = await API.verdictAbsence({
+      action_id: notif.action_id,
+      notification_id: notif.id,
+      approve: approve,
+    });
+    if (res && res.ok) {
+      alert("Решение об отпуске принято");
+    } else {
+      alert("Не удалось отправить решение об отпуске");
+    }
+  }
+
   return (
     <Container className="notification">
       <Row>
@@ -24,6 +38,12 @@ function Notification(notif) {
           </p>
           {/* <p className="notif-on-doc">On Document - 3600</p> */}
           <p className="notif-text">{notif.text}</p>
+          {notif.type == "vacation_request" ? (
+            <div>
+              <Button onClick={() => send_verdict(true)}>Согласовать</Button>
+              <Button onClick={() => send_verdict(false)}>Отклонить</Button>
+            </div>
+          ) : null}
         </Col>
         <Col className="notif-datetime-col">
           {/* <Row> */}
