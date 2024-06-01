@@ -17,3 +17,8 @@
   align-items: inherit;
   color: black;
 }
+
+.highlight-style { /*добавлено*/
+  background-color: rgb(71, 146, 167);
+  border-radius: 2px;
+}

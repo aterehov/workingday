@@ -12,10 +12,13 @@ import getCachedRole from "../../functions/getCachedRole";
 // import { ReactComponent as SVGUserLargeSlash } from "../public/images/icons/user-large-slash.svg";
 
 function LeftPanel({ highlight }) {
+  /*
   let highlight_style = {
     backgroundColor: "rgb(71, 146, 167)",
     borderRadius: "2px",
-  };
+  }; */
+  let highlight_style = document.querySelector('.highlight-style'); //изменено
+  
   return (
     <Drawer
       className="left-panel"

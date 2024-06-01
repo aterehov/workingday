@@ -6,7 +6,7 @@ import getCachedLogin from "../functions/getCachedLogin";
 import LeftPanel from "../components/LeftPanel/LeftPanel";
 import TopPanel from "../components/TopPanel/TopPanel";
 import { Col, Container, Dropdown, Form, Image, Row } from "react-bootstrap";
-import "../styles/notifications.css";
+import "../styles/doc_notifications.css"; //изменено
 import SearchByDateToggle from "../components/SearchByDateToggle";
 import Notification from "../components/Notification";
 import notifFilter from "../functions/notifFilter";
